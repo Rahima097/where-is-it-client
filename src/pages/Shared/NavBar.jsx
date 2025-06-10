@@ -16,6 +16,7 @@ const NavBar = () => {
         <div className='bg-secondary'>
             <div className="navbar w-11/12 shadow-md p-4 mx-auto ">
                 <div className="navbar-start">
+                    
                     <Link to="/" className="text-2xl font-bold text-white">WhereIsIt</Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
