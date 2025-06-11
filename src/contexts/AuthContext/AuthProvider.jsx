@@ -1,6 +1,6 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, useContext } from "react";
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword, updateProfile, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { app } from "../../firebase/firebase.init"
+import { app } from "../../firebase/firebase.init";
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
@@ -63,3 +63,7 @@ const AuthProvider = ({ children }) => {
 };
 
 export default AuthProvider;
+
+export const useAuth = () => {
+  return useContext(AuthContext);
+};
