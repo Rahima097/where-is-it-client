@@ -13,7 +13,7 @@ const Banner = () => {
       subtitle: "Report it and let our community help you find it",
       image: "https://i.ibb.co/v6XLDDD0/lost-item.jpg",
       buttonText: "Report Lost Item",
-      buttonLink: "/add-item",
+      buttonLink: "/addItems",
     },
     {
       id: 2,
@@ -21,7 +21,7 @@ const Banner = () => {
       subtitle: "Help someone reunite with their lost belongings",
       image: "https://i.ibb.co/t7djQD8/found-item.jpg",
       buttonText: "Report Found Item",
-      buttonLink: "/add-item",
+      buttonLink: "/addItems",
     },
     {
       id: 3,
@@ -29,7 +29,7 @@ const Banner = () => {
       subtitle: "Browse through our database of found items",
       image: "https://i.ibb.co/jZrP977p/browse-data.jpg",
       buttonText: "Browse Items",
-      buttonLink: "/all-items",
+      buttonLink: "/allitems",
     },
   ];
 

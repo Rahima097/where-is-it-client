@@ -1,9 +1,165 @@
-import React from 'react';
+import React, { useState } from 'react';
+// import useAuth from '../../hooks/useAuth';
+import { useAuth } from '../../contexts/AuthContext/AuthProvider';
+import axios from 'axios';
+import Swal from 'sweetalert2';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
 
 const AddItem = () => {
+    const { user } = useAuth();
+    const [date, setDate] = useState(new Date());
+
+    const handleAddItem = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        const newItem = {
+            postType: data.postType,
+            image: data.image,
+            title: data.title,
+            description: data.description,
+            category: data.category,
+            location: data.location,
+            date: date.toISOString(),
+            contactName: user.displayName,
+            contactEmail: user.email,
+        };
+
+        axios.post(`${import.meta.env.VITE_API_URL}/items`, newItem)
+            .then(res => {
+                if (res.data.insertedId) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Your item post has been added!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    form.reset();
+                    setDate(new Date());
+                }
+            })
+            .catch(err => console.error(err));
+    };
+
+
     return (
-        <div>
-            
+        <div className='bg-base-200 py-10'>
+            <div className="max-w-4xl mx-auto px-4 py-8">
+                <div className="bg-white shadow-xl rounded-xl p-8 space-y-6">
+                    <h2 className="text-3xl font-bold text-center text-primary">Add Your Lost or Found Item</h2>
+
+                    <form onSubmit={handleAddItem} className="space-y-8">
+                        <div>
+                            <h3 className="text-xl font-semibold mb-4 border-b pb-2 text-secondary">Item Details</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label className="block mb-1 font-medium">Post Type</label>
+                                    <select name="postType" className="select select-bordered w-full" required>
+                                        <option value="Lost">Lost</option>
+                                        <option value="Found">Found</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label className="block mb-1 font-medium">Thumbnail (Image URL)</label>
+                                    <input
+                                        type="text"
+                                        name="image"
+                                        placeholder="Image URL"
+                                        className="input input-bordered w-full"
+                                        required
+                                    />
+                                </div>
+
+                                <div>
+                                    <label className="block mb-1 font-medium">Title</label>
+                                    <input
+                                        type="text"
+                                        name="title"
+                                        placeholder="Item Title"
+                                        className="input input-bordered w-full"
+                                        required
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block mb-1 font-medium">Category</label>
+                                    <select name="category" className="select select-bordered w-full" required>
+                                        <option value="pets">Pets</option>
+                                        <option value="documents">Documents</option>
+                                        <option value="gadgets">Gadgets</option>
+                                        <option value="others">Others</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label className="block mb-1 font-medium">Location Found/Lost</label>
+                                    <input
+                                        type="text"
+                                        name="location"
+                                        placeholder="Location"
+                                        className="input input-bordered w-full"
+                                        required
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block  mb-1 font-medium">Date Lost/Found</label>
+                                    <DatePicker
+                                        selected={date}
+                                        onChange={(date) => setDate(date)}
+                                        className="input input-bordered w-full"
+                                        dateFormat="yyyy-MM-dd"
+                                        required
+                                    />
+                                </div>
+
+                                <div className="md:col-span-2">
+                                    <label className="block mb-1 font-medium">Description</label>
+                                    <textarea
+                                        name="description"
+                                        className="textarea textarea-bordered w-full"
+                                        placeholder="Describe the item and where it was lost/found"
+                                        rows={4}
+                                        required
+                                    ></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 className="text-xl font-semibold mb-4 border-b pb-2 text-secondary">Contact Info</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label className="block mb-1 font-medium">Name</label>
+                                    <input
+                                        type="text"
+                                        value={user.displayName}
+                                        className="input input-bordered w-full bg-gray-100"
+                                        readOnly
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block mb-1 font-medium">Email</label>
+                                    <input
+                                        type="email"
+                                        value={user.email}
+                                        className="input input-bordered w-full bg-gray-100"
+                                        readOnly
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="text-center">
+                            <button type="submit" className="btn btn-primary px-10">
+                                Add Item
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     );
 };

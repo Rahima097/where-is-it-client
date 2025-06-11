@@ -25,14 +25,14 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><Link to="/" className="text-gray-300 hover:text-white">Home</Link></li>
               <li><Link to="/all-items" className="text-gray-300 hover:text-white">Lost & Found</Link></li>
+              <li><Link to="/addItems" className="text-gray-300 hover:text-white">Add Item</Link></li>
+              <li><Link to="/allRecovered" className="text-gray-300 hover:text-white">Recoverd Item</Link></li>
             </ul>
           </div>
 
           <div>
             <h3 className="text-lg font-semibold mb-4">Important Links</h3>
             <ul className="space-y-2">
-              <li><Link to="/addItems" className="text-gray-300 hover:text-white">Add Item</Link></li>
-              <li><Link to="/allRecovered" className="text-gray-300 hover:text-white">Recoverd Item</Link></li>
               <li><Link to="/register" className="text-gray-300 hover:text-white">Register</Link></li>
                <li><Link to="/login" className="text-gray-300 hover:text-white">Login</Link></li>
             </ul>
