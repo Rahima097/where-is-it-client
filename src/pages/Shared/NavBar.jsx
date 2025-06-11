@@ -1,10 +1,30 @@
-import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router';
+import React, { useState, useEffect, useRef } from 'react';
+import { Link, NavLink } from 'react-router'; 
 import { useAuth } from '../../contexts/AuthContext/AuthProvider';
 
 const NavBar = () => {
   const { user, logOut } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef();
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      await logOut();
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
 
   const publicLinks = (
     <>
@@ -24,30 +44,22 @@ const NavBar = () => {
   const privateDropdownLinks = (
     <>
       <li>
-        <NavLink to="/addItems" className={({ isActive }) => (isActive ? 'text-primary' : undefined)}>
+        <NavLink to="/addItems" onClick={() => setDropdownOpen(false)} className={({ isActive }) => (isActive ? 'text-primary' : undefined)}>
           Add Item
         </NavLink>
       </li>
       <li>
-        <NavLink to="/allRecovered" className={({ isActive }) => (isActive ? 'text-primary' : undefined)}>
+        <NavLink to="/allRecovered" onClick={() => setDropdownOpen(false)} className={({ isActive }) => (isActive ? 'text-primary' : undefined)}>
           Recovered Items
         </NavLink>
       </li>
       <li>
-        <NavLink to="/myItems" className={({ isActive }) => (isActive ? 'text-primary' : undefined)}>
+        <NavLink to="/myItems" onClick={() => setDropdownOpen(false)} className={({ isActive }) => (isActive ? 'text-primary' : undefined)}>
           Manage My Items
         </NavLink>
       </li>
     </>
   );
-
-  const handleLogout = async () => {
-    try {
-      await logOut();
-    } catch (error) {
-      console.error('Logout failed:', error);
-    }
-  };
 
   return (
     <div className="bg-secondary">
@@ -63,24 +75,20 @@ const NavBar = () => {
         </div>
 
         <div className="navbar-end flex items-center gap-4">
-          {!user && (
+          {!user ? (
             <Link to="/login" className="btn btn-sm btn-primary">
               Login
             </Link>
-          )}
-
-          {user && (
+          ) : (
             <>
-              <div
-                className="relative"
-                onMouseEnter={() => setDropdownOpen(true)}
-                onMouseLeave={() => setDropdownOpen(false)}
-              >
+              {/* Profile Dropdown */}
+              <div className="relative" ref={dropdownRef}>
                 <img
                   src={user.photoURL || 'https://cdn-icons-png.flaticon.com/512/149/149071.png'}
                   alt={user.displayName || 'User'}
                   className="w-10 h-10 rounded-full cursor-pointer object-cover"
                   title={user.displayName || 'User'}
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
                 />
                 {dropdownOpen && (
                   <ul className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg text-black p-2 z-50">
