@@ -4,7 +4,7 @@ import { AuthContext } from "../../contexts/AuthContext/AuthProvider";
 import { toast } from "react-toastify";
 import Lottie from "lottie-react";
 import { FaGoogle } from "react-icons/fa"
-import registerAnim from "../../assets/register.json";
+import registerAnim from "../../assets/AnimationImg/register.json";
 
 const Register = () => {
   const { createUser, updateUserProfile, googleLogin } = useContext(AuthContext);

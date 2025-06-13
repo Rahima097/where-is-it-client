@@ -4,7 +4,7 @@ import { AuthContext } from "../../contexts/AuthContext/AuthProvider";
 import { toast } from "react-toastify";
 import Lottie from "lottie-react";
 import { FaGoogle } from "react-icons/fa";
-import loginAnim from "../../assets/login.json"; 
+import loginAnim from "../../assets/AnimationImg/login.json"; 
 
 const Login = () => {
   const { signIn, googleLogin } = useContext(AuthContext);
