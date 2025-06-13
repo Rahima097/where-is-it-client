@@ -24,7 +24,7 @@ const LatestItems = () => {
         }
 
         const latestItems = res.data
-          .filter((item) => item.status !== "recovered")
+          // .filter((item) => item.status !== "recovered")
           .sort((a, b) => new Date(b.date) - new Date(a.date))
           .slice(0, 6);
 

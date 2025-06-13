@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import axios from 'axios';
@@ -32,6 +31,7 @@ const ItemDetails = () => {
       postType: item.postType,
       recoveredLocation,
       recoveredDate,
+      contactEmail: user.email.toLowerCase(), // Add this to make backend /recovered query match later
       recoveredBy: {
         name: user.displayName,
         email: user.email,
@@ -41,10 +41,12 @@ const ItemDetails = () => {
 
     try {
       const res = await axios.post(`${import.meta.env.VITE_API_URL}/recovered`, recoveredInfo);
-      if (res.data.modifiedCount || res.data.insertedId) {
-        Swal.fire('Success', 'Item marked as recovered!', 'success');
-        setItem({ ...item, status: 'recovered' });
-        setShowModal(false);
+      if (res.data?.result?.insertedId || res.data?.recoveryId) {
+        setItem(prev => ({ ...prev, status: 'recovered' }));
+        setShowModal(false); // ✅ Close the modal
+        Swal.fire('Success', 'Item marked as recovered!', 'success'); // ✅ Success Alert
+      } else {
+        Swal.fire('Error', 'Recovery failed. Please try again.', 'error');
       }
     } catch (err) {
       console.error(err);
@@ -59,7 +61,7 @@ const ItemDetails = () => {
       <h1 className="text-3xl font-bold mb-6 text-center">{item.title}</h1>
 
       <div className="bg-white rounded-xl shadow-lg p-6 flex flex-col md:flex-row gap-8">
-        {/* Left side - Details */}
+        {/* Left - Details */}
         <div className="flex-1 space-y-3">
           <p><span className="font-semibold">Type:</span> {item.postType}</p>
           <p><span className="font-semibold">Category:</span> {item.category}</p>
@@ -70,7 +72,9 @@ const ItemDetails = () => {
           <p><span className="font-semibold">Contact Name:</span> {item.contactName}</p>
           <p><span className="font-semibold">Contact Email:</span> {item.contactEmail}</p>
 
-          {item.status !== 'recovered' && (
+          {item.status === 'recovered' ? (
+            <button className="btn btn-disabled mt-4">Already Recovered</button>
+          ) : (
             <button
               onClick={() => setShowModal(true)}
               className="btn btn-primary mt-4"
@@ -80,7 +84,7 @@ const ItemDetails = () => {
           )}
         </div>
 
-        {/* Right side - Image */}
+        {/* Right - Image */}
         <div className="flex-1">
           <img
             src={item.image}
@@ -110,10 +114,13 @@ const ItemDetails = () => {
               className="input input-bordered w-full"
             />
 
-            <div className="text-sm text-gray-700">
-              <p><strong>Name:</strong> {user.displayName}</p>
-              <p><strong>Email:</strong> {user.email}</p>
-            </div>
+            {user && (
+              <div className="text-sm text-gray-700 space-y-1">
+                <p><strong>Name:</strong> {user.displayName}</p>
+                <p><strong>Email:</strong> {user.email}</p>
+                <img src={user.photoURL} alt="User" className="w-12 h-12 rounded-full mt-2" />
+              </div>
+            )}
 
             <div className="flex gap-2 justify-end">
               <button className="btn btn-primary" onClick={handleRecover}>Submit</button>

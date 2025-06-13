@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router';
+import { useNavigate } from 'react-router';
+import {
+  MapPin,
+  CalendarDays,
+  Search,
+  BadgeInfo,
+} from 'lucide-react';
 
 const AllItems = () => {
   const [items, setItems] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const fetchItems = async (search = '') => {
     try {
@@ -72,17 +79,43 @@ const AllItems = () => {
       {/* Items Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {items.map(item => (
-          <div key={item._id} className="bg-white rounded-xl shadow-xl hover:shadow-2xl transition duration-300">
-            <img src={item.image} alt={item.title} className="w-full h-56 object-cover rounded-t-xl" />
-            <div className="p-5 space-y-2">
-              <h3 className="text-xl font-semibold text-gray-800">{item.title}</h3>
-              <p className="text-sm text-gray-600"><span className="font-medium">Type:</span> {item.postType}</p>
-              <p className="text-sm text-gray-600"><span className="font-medium">Location:</span> {item.location}</p>
-              <p className="text-sm text-gray-600"><span className="font-medium">Date:</span> {new Date(item.date).toLocaleDateString()}</p>
+          <div key={item._id} className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col">
+            <div className="relative overflow-hidden rounded-t-2xl h-48">
+              <img
+                src={item.thumbnail || item.image || "https://via.placeholder.com/300x200"}
+                alt={item.title}
+                className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500"
+              />
+              <span className="absolute top-3 left-3 bg-primary text-white px-3 py-1 rounded-full text-xs font-semibold uppercase shadow">
+                {item.postType}
+              </span>
+            </div>
 
-              <Link to={`/items/${item._id}`} className="btn btn-sm btn-primary mt-3">
-                View Details
-              </Link>
+            <div className="p-5 flex flex-col flex-grow space-y-3">
+              <h3 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
+                <BadgeInfo className="w-5 h-5 text-primary" />
+                {item.title}
+              </h3>
+
+              <p className="text-gray-600 flex items-center gap-2 text-sm">
+                <MapPin className="w-4 h-4 text-primary" />
+                <span><strong>Location:</strong> {item.location || "Unknown"}</span>
+              </p>
+
+              <p className="text-gray-600 flex items-center gap-2 text-sm">
+                <CalendarDays className="w-4 h-4 text-primary" />
+                <span><strong>Date:</strong> {new Date(item.date).toLocaleDateString() || "N/A"}</span>
+              </p>
+
+              <div className="mt-auto flex justify-start">
+                <button
+                  onClick={() => navigate(`/items/${item._id}`)}
+                  className="bg-primary hover:bg-primary-focus text-white font-semibold py-2 px-6 rounded-lg transition-colors  flex items-center justify-center gap-2"
+                >
+                  <Search className="w-4 h-4" />
+                  View Details
+                </button>
+              </div>
             </div>
           </div>
         ))}
