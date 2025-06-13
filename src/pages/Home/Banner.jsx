@@ -1,6 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { Link } from "react-router";
+import { motion } from "framer-motion";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -57,13 +58,28 @@ const Banner = () => {
                 style={{ backgroundImage: `url(${slide.image})` }}
               >
                 <div className="absolute bg-[#0a1a3d90] inset-0 flex items-center justify-center">
-                  <div className="text-center  px-4">
-                    <h1 className="text-4xl text-white md:text-6xl font-bold mb-4">
-                      {slide.title}
-                    </h1>
+                  <div className="text-center px-4">
+                    {/* Animate Title */}
+                    <motion.h1
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ duration: 1 }}
+                      className="text-4xl text-white md:text-6xl font-bold mb-4"
+                    >
+                      <motion.span
+                        animate={{
+                          color: ["#fe6035", "#ffffff", "#8b5cf6"],
+                          transition: { duration: 2, repeat: Infinity },
+                        }}
+                      >
+                        {slide.title}
+                      </motion.span>
+                    </motion.h1>
+
                     <p className="text-xl text-white md:text-2xl mb-8">
                       {slide.subtitle}
                     </p>
+
                     <div>
                       <Link
                         to={slide.buttonLink}

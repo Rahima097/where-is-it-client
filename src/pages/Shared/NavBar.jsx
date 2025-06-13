@@ -1,13 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, NavLink } from 'react-router'; 
+import { Link, NavLink } from 'react-router';
 import { useAuth } from '../../contexts/AuthContext/AuthProvider';
+import {
+  Home,
+  Search,
+  PlusSquare,
+  ShieldCheck,
+  List,
+  LogIn,
+  LogOut,
+} from 'lucide-react'; 
 
 const NavBar = () => {
   const { user, logOut } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef();
-
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -30,12 +37,16 @@ const NavBar = () => {
     <>
       <li>
         <NavLink to="/" className={({ isActive }) => (isActive ? 'text-primary' : undefined)}>
-          Home
+          <div className="flex items-center gap-2">
+            <Home size={18} /> Home
+          </div>
         </NavLink>
       </li>
       <li>
         <NavLink to="/allItems" className={({ isActive }) => (isActive ? 'text-primary' : undefined)}>
-          Lost & Found
+          <div className="flex items-center gap-2">
+            <Search size={18} /> Lost & Found
+          </div>
         </NavLink>
       </li>
     </>
@@ -45,17 +56,23 @@ const NavBar = () => {
     <>
       <li>
         <NavLink to="/addItems" onClick={() => setDropdownOpen(false)} className={({ isActive }) => (isActive ? 'text-primary' : undefined)}>
-          Add Item
+          <div className="flex items-center gap-2">
+            <PlusSquare size={18} /> Add Item
+          </div>
         </NavLink>
       </li>
       <li>
         <NavLink to="/allRecovered" onClick={() => setDropdownOpen(false)} className={({ isActive }) => (isActive ? 'text-primary' : undefined)}>
-          Recovered Items
+          <div className="flex items-center gap-2">
+            <ShieldCheck size={18} /> Recovered Items
+          </div>
         </NavLink>
       </li>
       <li>
         <NavLink to="/myItems" onClick={() => setDropdownOpen(false)} className={({ isActive }) => (isActive ? 'text-primary' : undefined)}>
-          Manage My Items
+          <div className="flex items-center gap-2">
+            <List size={18} /> Manage My Items
+          </div>
         </NavLink>
       </li>
     </>
@@ -71,17 +88,18 @@ const NavBar = () => {
         </div>
 
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu text-white menu-horizontal px-1 gap-4">{publicLinks}</ul>
+          <ul className="menu text-white menu-horizontal px-1 gap-4">
+            {publicLinks}
+          </ul>
         </div>
 
         <div className="navbar-end flex items-center gap-4">
           {!user ? (
-            <Link to="/login" className="btn btn-sm btn-primary">
-              Login
+            <Link to="/login" className="btn btn-sm btn-primary flex items-center gap-2">
+              <LogIn size={16} /> Login
             </Link>
           ) : (
             <>
-              {/* Profile Dropdown */}
               <div className="relative" ref={dropdownRef}>
                 <img
                   src={user.photoURL || 'https://cdn-icons-png.flaticon.com/512/149/149071.png'}
@@ -97,8 +115,8 @@ const NavBar = () => {
                 )}
               </div>
 
-              <button onClick={handleLogout} className="btn btn-sm btn-error text-white">
-                Logout
+              <button onClick={handleLogout} className="btn btn-sm btn-primary text-white flex items-center gap-2">
+                <LogOut size={16} /> Logout
               </button>
             </>
           )}
