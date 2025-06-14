@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import useAuth from '../../hooks/useAuth';
+import { Helmet } from "react-helmet-async";
 import { useAuth } from '../../contexts/AuthContext/AuthProvider';
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -50,6 +50,9 @@ const AddItem = () => {
 
     return (
         <div className='bg-transparent py-10'>
+            <Helmet>
+                <title>Add items | WhereIsIt</title>
+            </Helmet>
             <WobbleBgAnimation></WobbleBgAnimation>
             <div className="max-w-4xl mx-auto px-4 py-8">
                 <div className="bg-base-200 shadow-xl rounded-xl p-8 space-y-6">

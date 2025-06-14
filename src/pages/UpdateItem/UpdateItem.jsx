@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Helmet } from "react-helmet-async";
 import { useParams, useNavigate } from 'react-router';
 import { useAuth } from '../../contexts/AuthContext/AuthProvider';
 import axios from 'axios';
@@ -64,6 +65,9 @@ const UpdateItem = () => {
 
     return (
         <div className='bg-transparent py-10'>
+            <Helmet>
+                <title>Update Item | WhereIsIt</title>
+            </Helmet>
             <WobbleBgAnimation></WobbleBgAnimation>
             <div className="max-w-4xl mx-auto px-4 py-8">
                 <div className="bg-base-200 shadow-xl rounded-xl p-8 space-y-6 ">

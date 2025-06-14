@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Helmet } from "react-helmet-async";
 import axios from 'axios';
 import { useNavigate } from 'react-router';
 import {
@@ -39,6 +40,9 @@ const AllItems = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
+      <Helmet>
+        <title>Lost & Found items  | WhereIsIt</title>
+      </Helmet>
       <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">All Lost & Found Items</h2>
 
       {/* Search Input */}

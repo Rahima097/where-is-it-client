@@ -46,7 +46,7 @@ const NavBar = () => {
       <li>
         <NavLink to="/allItems" className={({ isActive }) => (isActive ? 'text-primary' : undefined)}>
           <div className="flex items-center gap-2">
-            <Search size={18} /> Lost & Found
+            <Search size={18} /> Lost & Found Items
           </div>
         </NavLink>
       </li>

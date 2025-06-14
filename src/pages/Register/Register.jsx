@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../../contexts/AuthContext/AuthProvider";
 import { toast } from "react-toastify";
@@ -54,6 +55,9 @@ const Register = () => {
 
   return (
     <div className="relative min-h-screen w-12/12 mx-auto overflow-hidden flex items-center justify-center">
+      <Helmet>
+        <title>Register | WhereIsIt</title>
+      </Helmet>
       <BgAnimation></BgAnimation>
       <div className="relative z-20 w-full max-w-6xl mx-auto bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl grid grid-cols-1 md:grid-cols-2 p-8 md:p-16">
         <div className="flex flex-col justify-center">

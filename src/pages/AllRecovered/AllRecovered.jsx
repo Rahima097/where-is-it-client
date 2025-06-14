@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import axios from 'axios';
 import { useAuth } from '../../contexts/AuthContext/AuthProvider';
 import Swal from 'sweetalert2';
@@ -59,6 +60,9 @@ const AllRecovered = () => {
 
   return (
     <div className='bg-base-200'>
+      <Helmet>
+        <title> All Recovered | WhereIsIt </title>
+      </Helmet>
       <div className="max-w-6xl py-20 mx-auto p-4">
         <h1 className="text-3xl font-bold mb-6 pb-20 text-primary text-center">
           My Recovered Items

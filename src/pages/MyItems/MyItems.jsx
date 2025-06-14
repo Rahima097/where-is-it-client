@@ -1,10 +1,11 @@
 import { useContext, useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../../contexts/AuthContext/AuthProvider";
 import axios from "axios";
 import { Link } from "react-router";
 import Swal from "sweetalert2";
 
-   const MyItems = () => {
+const MyItems = () => {
   const { user } = useContext(AuthContext);
   const [myItems, setMyItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -57,6 +58,9 @@ import Swal from "sweetalert2";
 
   return (
     <div className="bg-base-200">
+      <Helmet>
+        <title>Manage My Items  | WhereIsIt</title>
+      </Helmet>
       <div className="max-w-6xl mx-auto py-20 p-4">
         <h2 className="text-3xl font-bold mb-6 text-primary text-center">Manage My Items</h2>
         {myItems.length === 0 ? (

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Helmet } from "react-helmet-async";
 import { useParams } from 'react-router';
 import axios from 'axios';
 import { useAuth } from '../../contexts/AuthContext/AuthProvider';
@@ -31,7 +32,7 @@ const ItemDetails = () => {
       postType: item.postType,
       recoveredLocation,
       recoveredDate,
-      contactEmail: user.email.toLowerCase(), // Add this to make backend /recovered query match later
+      contactEmail: user.email.toLowerCase(), 
       recoveredBy: {
         name: user.displayName,
         email: user.email,
@@ -43,8 +44,8 @@ const ItemDetails = () => {
       const res = await axios.post(`${import.meta.env.VITE_API_URL}/recovered`, recoveredInfo);
       if (res.data?.result?.insertedId || res.data?.recoveryId) {
         setItem(prev => ({ ...prev, status: 'recovered' }));
-        setShowModal(false); // ✅ Close the modal
-        Swal.fire('Success', 'Item marked as recovered!', 'success'); // ✅ Success Alert
+        setShowModal(false); 
+        Swal.fire('Success', 'Item marked as recovered!', 'success'); 
       } else {
         Swal.fire('Error', 'Recovery failed. Please try again.', 'error');
       }
@@ -58,6 +59,9 @@ const ItemDetails = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
+      <Helmet>
+        <title>{item.title} | Item Details | WhereIsIt</title>
+      </Helmet>
       <h1 className="text-3xl font-bold mb-6 text-center">{item.title}</h1>
 
       <div className="bg-white rounded-xl shadow-lg p-6 flex flex-col md:flex-row gap-8">

@@ -23,19 +23,19 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                Component: Home
+                element: <Home></Home>
             },
             {
                 path: 'register',
-                Component: Register
+                element: <Register></Register>
             },
             {
                 path: 'login',
-                Component: LogIn
+                element: <LogIn></LogIn>
             },
             {
                 path: 'allItems',
-                Component: AllItems
+                element: <AllItems></AllItems>
             },
             {
                 path: 'addItems',
@@ -62,7 +62,7 @@ const router = createBrowserRouter([
     },
     {
         path: "*",
-        Component: ErrorPage
+        element: <ErrorPage></ErrorPage>
     }
 ]);
 
