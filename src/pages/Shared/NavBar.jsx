@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, NavLink } from 'react-router';
 import { useAuth } from '../../contexts/AuthContext/AuthProvider';
+import logo from '../../assets/Img/whereisit_logo.png';
 import {
   Home,
   Search,
@@ -9,7 +10,7 @@ import {
   List,
   LogIn,
   LogOut,
-} from 'lucide-react'; 
+} from 'lucide-react';
 
 const NavBar = () => {
   const { user, logOut } = useAuth();
@@ -82,7 +83,8 @@ const NavBar = () => {
     <div className="bg-secondary">
       <div className="navbar w-11/12 shadow-md p-4 mx-auto">
         <div className="navbar-start">
-          <Link to="/" className="text-2xl font-bold text-white">
+          <Link to="/" className="flex items-center gap-2 text-2xl font-bold text-white">
+            <img src={logo} alt="Logo" className="w-8 h-8" />
             WhereIsIt
           </Link>
         </div>

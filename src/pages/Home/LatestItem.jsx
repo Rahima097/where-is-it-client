@@ -8,6 +8,7 @@ import {
   Search,
   BadgeInfo,
 } from "lucide-react";
+// import WobbleBgAnimation from "../Shared/BackgroundAnimation/WobbleBgAnimation";
 
 const LatestItems = () => {
   const [items, setItems] = useState([]);
@@ -43,7 +44,8 @@ const LatestItems = () => {
   }
 
   return (
-    <section className="p-4 max-w-7xl mx-auto py-20">
+    <section className="p-4 bg-transparent max-w-7xl mx-auto py-20">
+      {/* <WobbleBgAnimation></WobbleBgAnimation> */}
       {/* Animated Title */}
       <motion.h2
         initial={{ scale: 0 }}
@@ -118,6 +120,7 @@ const LatestItems = () => {
       </div>
 
       <div className="mt-10 text-center">
+    
         <button
           onClick={() => navigate("/allItems")}
           className="btn btn-outline text-primary border-primary"

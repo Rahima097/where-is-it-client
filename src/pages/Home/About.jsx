@@ -3,6 +3,7 @@ import { motion,} from "framer-motion";
 import lost from "../../assets/Img/lost.jpg";
 import found from "../../assets/Img/found.jpg";
 import { Link } from "react-router";
+import WobbleBgAnimation from "../Shared/BackgroundAnimation/WobbleBgAnimation";
 
 const About = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -17,6 +18,7 @@ const About = () => {
 
   return (
     <section className="bg-base-200 py-20 px-4 md:px-10 overflow-hidden">
+      <WobbleBgAnimation></WobbleBgAnimation>
       <div className="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row-reverse items-center gap-10">
         {/* Right: Images */}
         <div className="w-full lg:w-1/2 flex flex-col gap-6 items-center">

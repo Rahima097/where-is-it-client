@@ -49,7 +49,7 @@ const Banner = () => {
           }}
           navigation={true}
           modules={[Autoplay, Pagination, Navigation]}
-          className="mySwiper h-[500px] md:h-[650px]"
+          className="mySwiper text-primary h-[500px] md:h-[650px]"
         >
           {slides.map((slide) => (
             <SwiperSlide key={slide.id}>

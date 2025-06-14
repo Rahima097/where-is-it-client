@@ -4,7 +4,7 @@ import axios from "axios";
 import { Link } from "react-router";
 import Swal from "sweetalert2";
 
-const MyItems = () => {
+   const MyItems = () => {
   const { user } = useContext(AuthContext);
   const [myItems, setMyItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -56,50 +56,60 @@ const MyItems = () => {
   }
 
   return (
-    <div className="max-w-6xl mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-6 text-primary text-center">Manage My Items</h2>
-      {myItems.length === 0 ? (
-        <p className="text-center text-gray-600">No items found.</p>
-      ) : (
-        <div className="overflow-x-auto">
-          <table className="table w-full border rounded-lg">
-            <thead className="bg-gray-100">
-              <tr>
-                <th>Title</th>
-                <th>Category</th>
-                <th>Status</th>
-                <th>Update</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              {myItems.map((item) => (
-                <tr key={item._id}>
-                  <td>{item.title}</td>
-                  <td>{item.category}</td>
-                  <td>{item.status || "Pending"}</td>
-                  <td>
-                    <Link
-                      to={`/updateItems/${item._id}`}
-                      className="btn btn-sm bg-blue-500 text-white"
-                    >
-                      Update
-                    </Link>
-                  </td>
-                  <td>
-                    <button
-                      onClick={() => handleDelete(item._id)}
-                      className="btn btn-sm bg-red-500 text-white"
-                    >
-                      Delete
-                    </button>
-                  </td>
+    <div className="bg-base-200">
+      <div className="max-w-6xl mx-auto py-20 p-4">
+        <h2 className="text-3xl font-bold mb-6 text-primary text-center">Manage My Items</h2>
+        {myItems.length === 0 ? (
+          <>
+            <div className="flex flex-col justify-center items-center py-10">
+              <p className="text-center text-xl font-bold text-gray-600">No items found. Didn't added any item yet?</p>
+              <Link to="/addItems" className="btn btn-primary mt-10 ">Add Items</Link>
+            </div>
+          </>
+
+        ) : (
+          <div className="overflow-x-auto ">
+            <table className="table w-full border border-primary rounded-lg">
+              <thead className="bg-gray-200 text-secondary">
+                <tr>
+                  <th>#</th>
+                  <th>Title</th>
+                  <th>Category</th>
+                  <th>Status</th>
+                  <th>Update</th>
+                  <th>Delete</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+              </thead>
+              <tbody>
+                {myItems.map((item, index) => (
+                  <tr key={item._id}>
+                    <td>{index + 1}</td>
+                    <td>{item.title}</td>
+                    <td>{item.category}</td>
+                    <td>{item.status || "Pending"}</td>
+                    <td>
+                      <Link
+                        to={`/updateItems/${item._id}`}
+                        className="btn btn-sm bg-secondary text-white"
+                      >
+                        Update
+                      </Link>
+                    </td>
+                    <td>
+                      <button
+                        onClick={() => handleDelete(item._id)}
+                        className="btn btn-sm bg-primary text-white"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

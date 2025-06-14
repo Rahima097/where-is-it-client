@@ -5,6 +5,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import WobbleBgAnimation from '../Shared/BackgroundAnimation/WobbleBgAnimation';
 
 
 const AddItem = () => {
@@ -48,9 +49,10 @@ const AddItem = () => {
 
 
     return (
-        <div className='bg-base-200 py-10'>
+        <div className='bg-transparent py-10'>
+            <WobbleBgAnimation></WobbleBgAnimation>
             <div className="max-w-4xl mx-auto px-4 py-8">
-                <div className="bg-white shadow-xl rounded-xl p-8 space-y-6">
+                <div className="bg-base-200 shadow-xl rounded-xl p-8 space-y-6">
                     <h2 className="text-3xl font-bold text-center text-primary">Add Your Lost or Found Item</h2>
 
                     <form onSubmit={handleAddItem} className="space-y-8">

@@ -5,8 +5,7 @@ import faqAnimation from "../../assets/AnimationImg/faq.json";
 
 const Faq = () => {
   return (
-    <section className="max-w-7xl mx-auto py-20 px-4 md:px-10 space-y-12">
-      {/* Animated Title */}
+    <section className="max-w-7xl bg-transparent mx-auto py-20 px-4 md:px-10 space-y-12">
       <motion.h2
         initial={{ scale: 0 }}
         animate={{ scale: 1, transition: { duration: 2 } }}
@@ -15,7 +14,7 @@ const Faq = () => {
         Frequently Asked{" "}
         <motion.span
           animate={{
-            color: ["#fe6035", "#0a1a3d", "#8b5cf6"],
+            color: ["#fe6035", "#0a1a3d", "#8b5cf6", "#091057"],
             transition: { duration: 2, repeat: Infinity },
           }}
         >
@@ -28,6 +27,7 @@ const Faq = () => {
       </p>
 
       <div className="grid md:grid-cols-2 gap-14 md:gap-20 items-center">
+        
         {/* Lottie Animation */}
         <div className="w-full">
           <Lottie animationData={faqAnimation} loop={true} />
