@@ -18,7 +18,7 @@ const LatestItems = () => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/items");
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/items`);
 
         if (!Array.isArray(res.data)) {
           throw new Error("API response is not an array");

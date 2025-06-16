@@ -68,7 +68,21 @@ const ItemDetails = () => {
       Swal.fire('Error', 'Something went wrong', 'error');
     }
   };
-  if (!item) return <div className="text-center py-10">Loading...</div>;
+  if (!item) return <div className="flex justify-center my-10">
+    <svg
+      className="animate-spin h-10 w-10 text-primary"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none" viewBox="0 0 24 24"
+    >
+      <circle
+        className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"
+      />
+      <path
+        className="opacity-75" fill="currentColor"
+        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+      />
+    </svg>
+  </div>;
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-20">
@@ -94,17 +108,7 @@ const ItemDetails = () => {
             <button className="btn btn-disabled mt-4">Already Recovered</button>
           ) : (
             <button
-              onClick={() => {
-                if (item.contactEmail !== user?.email) {
-                  Swal.fire(
-                    'Access Denied',
-                    'Only the user who added this post can recover it.',
-                    'error'
-                  );
-                } else {
-                  setShowModal(true);
-                }
-              }}
+              onClick={() => setShowModal(true)}
               className="btn btn-primary mt-4"
             >
               {item.postType === 'Lost' ? 'Found This!' : 'This is Mine!'}
