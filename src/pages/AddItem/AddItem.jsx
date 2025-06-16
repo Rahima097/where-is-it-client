@@ -6,13 +6,15 @@ import Swal from 'sweetalert2';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import WobbleBgAnimation from '../Shared/BackgroundAnimation/WobbleBgAnimation';
+import { getAuth } from 'firebase/auth';
 
 
 const AddItem = () => {
     const { user } = useAuth();
     const [date, setDate] = useState(new Date());
+    const auth = getAuth();  
 
-    const handleAddItem = (e) => {
+    const handleAddItem = async (e) => {
         e.preventDefault();
         const form = e.target;
         const formData = new FormData(form);
@@ -30,21 +32,38 @@ const AddItem = () => {
             contactEmail: user.email,
         };
 
-        axios.post(`${import.meta.env.VITE_API_URL}/items`, newItem)
-            .then(res => {
-                if (res.data.insertedId) {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Your item post has been added!',
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                    form.reset();
-                    setDate(new Date());
+        try {
+            const token = await auth.currentUser.getIdToken();
+
+            const res = await axios.post(
+                `${import.meta.env.VITE_API_URL}/items`,
+                newItem,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,  
+                    },
                 }
-            })
-            .catch(err => console.error(err));
+            );
+
+            if (res.data.insertedId) {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Your item post has been added!',
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                form.reset();
+                setDate(new Date());
+            }
+        } catch (err) {
+            console.error(err);
+            Swal.fire({
+                icon: 'error',
+                title: 'Failed to add item',
+                text: err.response?.data?.message || err.message || 'Unknown error',
+            });
+        }
     };
 
 

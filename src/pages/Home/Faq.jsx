@@ -63,7 +63,7 @@ const Faq = () => {
               How can I prove an item belongs to me?
             </div>
             <div className="collapse-content">
-              <p>Provide specific descriptions, receipts, or photos to verify ownership before recovery.</p>
+              <p>Provide specific descriptions, receipts, or photos to verify ownership before recovery. please contact with the post owner via contact info.</p>
             </div>
           </div>
 

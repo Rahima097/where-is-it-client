@@ -4,7 +4,7 @@
 To create a community-driven platform that helps people reunite with their lost belongings by providing an easy-to-use interface for reporting, searching, and recovering lost or found items.
 
 ## Live URL
-🌐 **Frontend**: 
+🌐 **Frontend**: https://whereisit-lost-and-found-item.netlify.app/ 
 🔗 **Backend**: 
 
 ## Key Features
@@ -87,7 +87,7 @@ To create a community-driven platform that helps people reunite with their lost 
 - **MongoDB** - NoSQL database
 - **CORS** - Cross-origin resource sharing
 - **dotenv** - Environment variable management
-- **JWT** - jsonwebtoken
+- **JWT** - firebase-admin
 
 
 

@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import WobbleBgAnimation from '../Shared/BackgroundAnimation/WobbleBgAnimation';
+import { getAuth } from 'firebase/auth';
 
 const UpdateItem = () => {
     const { id } = useParams();
@@ -16,17 +17,31 @@ const UpdateItem = () => {
     const [itemData, setItemData] = useState(null);
     const [date, setDate] = useState(new Date());
 
-    // Fetch item data
-    useEffect(() => {
-        axios.get(`${import.meta.env.VITE_API_URL}/items/${id}`)
-            .then(res => {
-                setItemData(res.data);
-                setDate(new Date(res.data.date));
-            })
-            .catch(err => console.error(err));
-    }, [id]);
+    const auth = getAuth();
 
-    const handleUpdateItem = (e) => {
+
+    useEffect(() => {
+        const fetchItemData = async () => {
+            try {
+                if (!user) return; 
+
+                const token = await auth.currentUser.getIdToken();
+                const res = await axios.get(`${import.meta.env.VITE_API_URL}/items/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                setItemData(res.data);
+                setDate(new Date(res.data.date || Date.now()));
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
+        fetchItemData();
+    }, [id, user]);
+
+    const handleUpdateItem = async (e) => {
         e.preventDefault();
         const form = e.target;
         const formData = new FormData(form);
@@ -42,21 +57,38 @@ const UpdateItem = () => {
             date: date.toISOString(),
         };
 
-        axios.patch(`${import.meta.env.VITE_API_URL}/items/${id}`, updatedItem)
-            .then(res => {
-                if (res.data.modifiedCount > 0 || res.data.acknowledged || res.status === 200) {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Item updated successfully!',
-                        showConfirmButton: false,
-                        timer: 1500
-                    }).then(() => {
-                        navigate('/myItems');
-                    });
+        try {
+            const token = await auth.currentUser.getIdToken();
+
+            const res = await axios.patch(
+                `${import.meta.env.VITE_API_URL}/items/${id}`,
+                updatedItem,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
                 }
-            })
-            .catch(err => console.error(err));
+            );
+
+            if (res.data.modifiedCount > 0 || res.data.acknowledged || res.status === 200) {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Item updated successfully!',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    navigate('/myItems');
+                });
+            }
+        } catch (err) {
+            console.error(err);
+            Swal.fire({
+                icon: 'error',
+                title: 'Update failed',
+                text: err.response?.data?.message || err.message || 'Unknown error',
+            });
+        }
     };
 
     if (!itemData) {

@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import axios from 'axios';
 import { useAuth } from '../../contexts/AuthContext/AuthProvider';
 import Swal from 'sweetalert2';
 import { FaTable, FaThLarge } from 'react-icons/fa';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const AllRecovered = () => {
   const { user } = useAuth();
+
+  const axiosSecure = useAxiosSecure();
 
   const [recoveredItems, setRecoveredItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -19,9 +21,7 @@ const AllRecovered = () => {
     const fetchRecoveredItems = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(
-          `${import.meta.env.VITE_API_URL}/recovered?email=${user.email.toLowerCase()}`
-        );
+        const res = await axiosSecure.get(`/recovered?email=${user.email.toLowerCase()}`);
         setRecoveredItems(res.data);
       } catch (error) {
         console.error('Error fetching recovered items:', error);
@@ -32,12 +32,9 @@ const AllRecovered = () => {
     };
 
     fetchRecoveredItems();
-  }, [user]);
+  }, [user, axiosSecure]);
 
   const filteredItems = recoveredItems.filter((item) => {
-    const isOwner = item.recoveredBy?.email === user?.email;
-    if (!isOwner) return false;
-
     const term = searchTerm.toLowerCase();
     return (
       item.title?.toLowerCase().includes(term) ||

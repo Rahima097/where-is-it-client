@@ -1,20 +1,21 @@
 import { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../../contexts/AuthContext/AuthProvider";
-import axios from "axios";
 import { Link } from "react-router";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const MyItems = () => {
   const { user } = useContext(AuthContext);
+  const axiosSecure = useAxiosSecure();
   const [myItems, setMyItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (user?.email) {
       setLoading(true);
-      axios
-        .get(`${import.meta.env.VITE_API_URL}/myItems?email=${user.email}`)
+      axiosSecure
+        .get(`/myItems?email=${user.email}`)
         .then((res) => {
           setMyItems(res.data);
           setLoading(false);
@@ -24,7 +25,7 @@ const MyItems = () => {
           setLoading(false);
         });
     }
-  }, [user]);
+  }, [user, axiosSecure]);
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -35,8 +36,8 @@ const MyItems = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios
-          .delete(`${import.meta.env.VITE_API_URL}/items/${id}`)
+        axiosSecure
+          .delete(`/items/${id}`)
           .then((res) => {
             if (res.data.deletedCount > 0) {
               Swal.fire("Deleted!", "Item has been deleted.", "success");
@@ -51,7 +52,6 @@ const MyItems = () => {
       }
     });
   };
-
   if (loading) {
     return <div className="text-center my-20">Loading...</div>;
   }

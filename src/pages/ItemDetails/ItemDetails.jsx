@@ -1,25 +1,38 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from "react-helmet-async";
 import { useParams } from 'react-router';
-import axios from 'axios';
 import { useAuth } from '../../contexts/AuthContext/AuthProvider';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Swal from 'sweetalert2';
+import WobbleBgAnimation from './../Shared/BackgroundAnimation/WobbleBgAnimation';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const ItemDetails = () => {
   const { id } = useParams();
   const { user } = useAuth();
+
+  const axiosSecure = useAxiosSecure();
+
   const [item, setItem] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [recoveredDate, setRecoveredDate] = useState(new Date());
   const [recoveredLocation, setRecoveredLocation] = useState('');
 
   useEffect(() => {
-    axios.get(`${import.meta.env.VITE_API_URL}/items/${id}`)
-      .then(res => setItem(res.data))
-      .catch(err => console.error(err));
-  }, [id]);
+    if (!id || !user) return;
+
+    const fetchItem = async () => {
+      try {
+        const res = await axiosSecure.get(`/items/${id}`);
+        setItem(res.data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchItem();
+  }, [id, user, axiosSecure]);
 
   const handleRecover = async () => {
     if (!recoveredLocation) {
@@ -32,7 +45,7 @@ const ItemDetails = () => {
       postType: item.postType,
       recoveredLocation,
       recoveredDate,
-      contactEmail: user.email.toLowerCase(), 
+      contactEmail: user.email.toLowerCase(),
       recoveredBy: {
         name: user.displayName,
         email: user.email,
@@ -41,11 +54,12 @@ const ItemDetails = () => {
     };
 
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/recovered`, recoveredInfo);
-      if (res.data?.result?.insertedId || res.data?.recoveryId) {
+      const res = await axiosSecure.post('/recovered', recoveredInfo);
+
+      if (res.data?.recoveryId) {
         setItem(prev => ({ ...prev, status: 'recovered' }));
-        setShowModal(false); 
-        Swal.fire('Success', 'Item marked as recovered!', 'success'); 
+        setShowModal(false);
+        Swal.fire('Success', 'Item marked as recovered!', 'success');
       } else {
         Swal.fire('Error', 'Recovery failed. Please try again.', 'error');
       }
@@ -54,17 +68,17 @@ const ItemDetails = () => {
       Swal.fire('Error', 'Something went wrong', 'error');
     }
   };
-
   if (!item) return <div className="text-center py-10">Loading...</div>;
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
+    <div className="max-w-6xl mx-auto px-4 py-20">
       <Helmet>
         <title>{item.title} | Item Details | WhereIsIt</title>
       </Helmet>
-      <h1 className="text-3xl font-bold mb-6 text-center">{item.title}</h1>
+      <WobbleBgAnimation></WobbleBgAnimation>
+      <h1 className="text-3xl text-primary font-bold mb-6 text-center">{item.title}</h1>
 
-      <div className="bg-white rounded-xl shadow-lg p-6 flex flex-col md:flex-row gap-8">
+      <div className="bg-base-200 rounded-xl shadow-lg p-8 flex flex-col md:flex-row gap-8">
         {/* Left - Details */}
         <div className="flex-1 space-y-3">
           <p><span className="font-semibold">Type:</span> {item.postType}</p>
@@ -80,7 +94,17 @@ const ItemDetails = () => {
             <button className="btn btn-disabled mt-4">Already Recovered</button>
           ) : (
             <button
-              onClick={() => setShowModal(true)}
+              onClick={() => {
+                if (item.contactEmail !== user?.email) {
+                  Swal.fire(
+                    'Access Denied',
+                    'Only the user who added this post can recover it.',
+                    'error'
+                  );
+                } else {
+                  setShowModal(true);
+                }
+              }}
               className="btn btn-primary mt-4"
             >
               {item.postType === 'Lost' ? 'Found This!' : 'This is Mine!'}
@@ -100,7 +124,7 @@ const ItemDetails = () => {
 
       {/* Recovery Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-secondary/70 bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-xl w-full max-w-md space-y-4">
             <h3 className="text-xl font-semibold">Recovery Details</h3>
 

@@ -58,14 +58,14 @@ const NavBar = () => {
       <li>
         <NavLink to="/addItems" onClick={() => setDropdownOpen(false)} className={({ isActive }) => (isActive ? 'text-primary' : undefined)}>
           <div className="flex items-center gap-2">
-            <PlusSquare size={18} /> Add Item
+            <PlusSquare size={18} /> Add Lost & Found Item
           </div>
         </NavLink>
       </li>
       <li>
         <NavLink to="/allRecovered" onClick={() => setDropdownOpen(false)} className={({ isActive }) => (isActive ? 'text-primary' : undefined)}>
           <div className="flex items-center gap-2">
-            <ShieldCheck size={18} /> Recovered Items
+            <ShieldCheck size={18} /> All Recovered Items 
           </div>
         </NavLink>
       </li>
@@ -111,7 +111,7 @@ const NavBar = () => {
                   onClick={() => setDropdownOpen(!dropdownOpen)}
                 />
                 {dropdownOpen && (
-                  <ul className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg text-black p-2 z-50">
+                  <ul className="absolute right-0 mt-2 lg:w-56 w-48 text-sm lg:text-base bg-white rounded-md shadow-lg text-black p-2 z-50">
                     {privateDropdownLinks}
                   </ul>
                 )}
