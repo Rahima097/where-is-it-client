@@ -65,7 +65,7 @@ const Register = () => {
           <form onSubmit={handleRegister} className="space-y-4">
             <input name="name" type="text" placeholder="Full Name" className="input input-bordered w-full" required />
             <input name="email" type="email" placeholder="Email" className="input input-bordered w-full" required />
-            <input name="photo" type="text" placeholder="Photo URL (optional)" className="input input-bordered w-full" />
+            <input name="photo" type="text" placeholder="Photo URL" className="input input-bordered w-full" required />
             <input name="password" type="password" placeholder="Password" className="input input-bordered w-full" required />
             {error && <p className="text-red-500 text-sm">{error}</p>}
             <button className="btn btn-primary w-full">Register</button>
