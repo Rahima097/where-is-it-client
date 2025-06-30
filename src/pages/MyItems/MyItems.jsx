@@ -71,7 +71,7 @@ const MyItems = () => {
   }
 
   return (
-    <div className="bg-base-200">
+    <div className="">
       <Helmet>
         <title>Manage My Items  | WhereIsIt</title>
       </Helmet>

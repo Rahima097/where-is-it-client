@@ -35,66 +35,59 @@ const Banner = () => {
   ];
 
   return (
-    <div className="">
-      <div className="relative">
-        <Swiper
-          spaceBetween={0}
-          centeredSlides={true}
-          autoplay={{
-            delay: 5000,
-            disableOnInteraction: false,
-          }}
-          pagination={{
-            clickable: true,
-          }}
-          navigation={true}
-          modules={[Autoplay, Pagination, Navigation]}
-          className="mySwiper text-primary h-[500px] md:h-[650px]"
-        >
-          {slides.map((slide) => (
-            <SwiperSlide key={slide.id}>
-              <div
-                className="h-full w-full bg-cover bg-center relative"
-                style={{ backgroundImage: `url(${slide.image})` }}
-              >
-                <div className="absolute bg-[#0a1a3d90] inset-0 flex items-center justify-center">
-                  <div className="text-center px-4">
-                    {/* Animate Title */}
-                    <motion.h1
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ duration: 1 }}
-                      className="text-4xl text-white md:text-6xl font-bold mb-4"
+    <div className="relative">
+      <Swiper
+        spaceBetween={0}
+        centeredSlides={true}
+        autoplay={{
+          delay: 5000,
+          disableOnInteraction: false,
+        }}
+        pagination={{ clickable: true }}
+        navigation={true}
+        modules={[Autoplay, Pagination, Navigation]}
+        className="mySwiper"
+      >
+        {slides.map((slide) => (
+          <SwiperSlide key={slide.id}>
+            <div
+              className="min-h-[60vh] md:min-h-[70vh] w-full bg-cover bg-center relative"
+              style={{ backgroundImage: `url(${slide.image})` }}
+            >
+              <div className="absolute inset-0 bg-[#0a1a3db0] flex items-center justify-center px-4">
+                <div className="text-center max-w-2xl mx-auto">
+                  <motion.h1
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 1 }}
+                    className="text-4xl md:text-6xl font-bold mb-4 text-white"
+                  >
+                    <motion.span
+                      animate={{
+                        color: ["#fe6035", "#ffffff", "#8b5cf6"],
+                        transition: { duration: 2, repeat: Infinity },
+                      }}
                     >
-                      <motion.span
-                        animate={{
-                          color: ["#fe6035", "#ffffff", "#8b5cf6"],
-                          transition: { duration: 2, repeat: Infinity },
-                        }}
-                      >
-                        {slide.title}
-                      </motion.span>
-                    </motion.h1>
+                      {slide.title}
+                    </motion.span>
+                  </motion.h1>
 
-                    <p className="text-xl text-white md:text-2xl mb-8">
-                      {slide.subtitle}
-                    </p>
+                  <p className="text-lg md:text-2xl text-white mb-8">
+                    {slide.subtitle}
+                  </p>
 
-                    <div>
-                      <Link
-                        to={slide.buttonLink}
-                        className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-secondary"
-                      >
-                        {slide.buttonText}
-                      </Link>
-                    </div>
-                  </div>
+                  <Link
+                    to={slide.buttonLink}
+                    className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-secondary"
+                  >
+                    {slide.buttonText}
+                  </Link>
                 </div>
               </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </div>
   );
 };

@@ -26,7 +26,7 @@ const LatestItems = () => {
         const latestItems = res.data
           // .filter((item) => item.status !== "recovered")
           .sort((a, b) => new Date(b.date) - new Date(a.date))
-          .slice(0, 6);
+          .slice(0, 8);
 
         setItems(latestItems);
       } catch (error) {
@@ -66,7 +66,7 @@ const LatestItems = () => {
         Here are the most recently reported lost or found items.
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {items.map((item, i) => (
           <motion.div
             key={item._id}

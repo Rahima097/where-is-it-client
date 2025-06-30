@@ -14,6 +14,9 @@ import ItemDetails from '../pages/ItemDetails/ItemDetails';
 import MyItems from '../pages/MyItems/MyItems';
 import UpdateItem from '../pages/UpdateItem/UpdateItem';
 import AllRecovered from '../pages/AllRecovered/AllRecovered';
+import AboutUs from '../pages/AboutUs/AboutUs';
+import Faq from '../pages/Shared/Faq';
+import ContactUs from '../pages/ContactUs/ContactUs';
 
 
 const router = createBrowserRouter([
@@ -36,6 +39,18 @@ const router = createBrowserRouter([
             {
                 path: 'allItems',
                 element: <AllItems></AllItems>
+            },
+            {
+                path: 'about-us',
+                element: <AboutUs></AboutUs>
+            },
+            {
+                path: 'faq',
+                element: <Faq></Faq>
+            },
+            {
+                path: 'contact-us',
+                element: <ContactUs></ContactUs>
             },
             {
                 path: 'addItems',

@@ -3,7 +3,7 @@ import { motion,} from "framer-motion";
 import lost from "../../assets/Img/lost.jpg";
 import found from "../../assets/Img/found.jpg";
 import { Link } from "react-router";
-import WobbleBgAnimation from "../Shared/BackgroundAnimation/WobbleBgAnimation";
+import WobbleBgAnimation from "./BackgroundAnimation/WobbleBgAnimation";
 
 const About = () => {
   const [isMobile, setIsMobile] = useState(false);
