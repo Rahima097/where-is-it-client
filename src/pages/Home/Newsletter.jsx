@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send } from 'lucide-react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Newsletter = () => {
+  const [email, setEmail] = useState('');
+
+  const handleSubscribe = () => {
+    if (!email) {
+      toast.error('Please enter a valid email address.');
+      return;
+    }
+
+    // Simulate successful submission
+    toast.success('Subscribed successfully!');
+    setEmail('');
+  };
+
   return (
     <section className="bg-base-200 py-16 px-4 text-black">
       <div className="max-w-4xl mx-auto text-center">
@@ -31,9 +46,14 @@ const Newsletter = () => {
           <input
             type="email"
             placeholder="Your email address..."
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className="input input-bordered input-white w-full sm:flex-1 bg-base-100 text-black"
           />
-          <button className="btn btn-primary flex items-center gap-2">
+          <button
+            className="btn btn-primary flex items-center gap-2"
+            onClick={handleSubscribe}
+          >
             <Send className="w-4 h-4" />
             Subscribe
           </button>
