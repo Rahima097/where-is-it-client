@@ -23,7 +23,7 @@ const Faq = () => {
       </motion.h2>
 
       <p className="text-center max-w-2xl mx-auto text-gray-600 text-sm md:text-base">
-        Common questions and answers about using WhereIsIt — your trusted lost and found platform.
+        Common questions and answers about using WhereIsItHub — your trusted lost and found platform.
       </p>
 
       <div className="grid md:grid-cols-2 gap-14 md:gap-20 items-center">
@@ -53,7 +53,7 @@ const Faq = () => {
               Is there any fee to post or recover an item?
             </div>
             <div className="collapse-content">
-              <p>No, WhereIsIt is completely free to use for both posting and recovering items.</p>
+              <p>No, WhereIsItHub is completely free to use for both posting and recovering items.</p>
             </div>
           </div>
 

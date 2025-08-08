@@ -81,7 +81,7 @@ const AllItems = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 py-16">
       <Helmet>
-        <title>All Items | WhereIsIt</title>
+        <title>All Items | WhereIsItHub</title>
       </Helmet>
 
       {/* Animated Title */}

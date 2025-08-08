@@ -10,7 +10,7 @@ const testimonials = [
     name: 'Kamrul Hasan',
     role: 'Student',
     image: 'https://i.ibb.co/pry49Ltd/Kamrul-Hasan.png',
-    quote: 'WhereIsIt helped me recover my lost laptop within hours—amazing service!',
+    quote: 'WhereIsItHub helped me recover my lost laptop within hours—amazing service!',
   },
   {
     name: 'Farzana Karim',
@@ -28,7 +28,7 @@ const testimonials = [
     name: 'Sumaiya Siddiqua',
     role: 'Entrepreneur',
     image: 'https://i.ibb.co/bRFzGRXJ/Sumaiya-Siddiqua.png',
-    quote: 'Fast, smooth, and easy recovery process. Highly recommend WhereIsIt!',
+    quote: 'Fast, smooth, and easy recovery process. Highly recommend WhereIsItHub!',
   },
 ];
 

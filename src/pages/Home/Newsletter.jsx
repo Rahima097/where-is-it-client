@@ -38,7 +38,7 @@ const Newsletter = () => {
         </motion.h2>
 
         <p className="text-black max-w-xl mx-auto mb-8 text-sm md:text-base">
-          Stay updated with the latest lost and found items on WhereIsIt. Be the first to know when new listings go live.
+          Stay updated with the latest lost and found items on WhereIsItHub. Be the first to know when new listings go live.
         </p>
 
         {/* Form */}

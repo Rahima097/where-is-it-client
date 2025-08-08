@@ -70,7 +70,7 @@ const AddItem = () => {
     return (
         <div className='bg-transparent py-10'>
             <Helmet>
-                <title>Add items | WhereIsIt</title>
+                <title>Add items | WhereIsItHub</title>
             </Helmet>
             <WobbleBgAnimation></WobbleBgAnimation>
             <div className="max-w-4xl mx-auto px-4 py-8">

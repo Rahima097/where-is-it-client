@@ -141,7 +141,7 @@ const NavBar = () => {
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2 text-2xl font-bold text-white">
               <img src={logo} alt="Logo" className="w-8 h-8" />
-              <span className="hidden sm:inline">WhereIsIt</span>
+              <span className="hidden sm:inline">WhereIsItHub</span>
             </Link>
           </div>
 

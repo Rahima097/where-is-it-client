@@ -98,7 +98,7 @@ const UpdateItem = () => {
     return (
         <div className='bg-transparent py-10'>
             <Helmet>
-                <title>Update Item | WhereIsIt</title>
+                <title>Update Item | WhereIsItHub</title>
             </Helmet>
             <WobbleBgAnimation></WobbleBgAnimation>
             <div className="max-w-4xl mx-auto px-4 py-8">

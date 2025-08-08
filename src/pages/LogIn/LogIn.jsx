@@ -48,7 +48,7 @@ const Login = () => {
   return (
     <div className="relative min-h-screen w-12/12 mx-auto overflow-hidden flex items-center justify-center">
       <Helmet>
-        <title>Login | WhereIsIt</title>
+        <title>Login | WhereIsItHub</title>
       </Helmet>
       <WobbleBgAnimation></WobbleBgAnimation>
       <div className="relative z-20 w-full max-w-6xl mx-auto bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl grid grid-cols-1 md:grid-cols-2 p-8 md:p-16">

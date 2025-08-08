@@ -72,7 +72,7 @@ const AllRecovered = () => {
   return (
     <div className='bg-base-200'>
       <Helmet>
-        <title> All Recovered | WhereIsIt </title>
+        <title> All Recovered | WhereIsItHub </title>
       </Helmet>
       <div className="max-w-6xl py-20 mx-auto p-4">
         <h1 className="text-3xl font-bold mb-6 pb-20 text-primary text-center">

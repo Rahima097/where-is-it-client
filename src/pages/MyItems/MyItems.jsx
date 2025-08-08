@@ -73,7 +73,7 @@ const MyItems = () => {
   return (
     <div className="">
       <Helmet>
-        <title>Manage My Items  | WhereIsIt</title>
+        <title>Manage My Items  | WhereIsItHub</title>
       </Helmet>
       <div className="max-w-6xl mx-auto py-20 p-4">
         <h2 className="text-3xl font-bold mb-6 text-primary text-center">Manage My Items</h2>

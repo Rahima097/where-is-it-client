@@ -87,7 +87,7 @@ const ItemDetails = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 py-20">
       <Helmet>
-        <title>{item.title} | Item Details | WhereIsIt</title>
+        <title>{item.title} | Item Details | WhereIsItHub</title>
       </Helmet>
       <WobbleBgAnimation></WobbleBgAnimation>
       <h1 className="text-3xl text-primary font-bold mb-6 text-center">{item.title}</h1>

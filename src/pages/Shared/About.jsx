@@ -65,11 +65,11 @@ const About = () => {
                 transition: { duration: 2, repeat: Infinity },
               }}
             >
-              WhereIsIt
+              WhereIsItHub
             </motion.span>
           </motion.h1>
           <p className="text-base md:text-lg text-gray-700">
-            WhereIsIt is your trusted platform for reuniting people with their lost or found belongings. Whether it's keys, documents, pets, or phones — we help connect the community to restore what’s missing.
+            WhereIsItHub is your trusted platform for reuniting people with their lost or found belongings. Whether it's keys, documents, pets, or phones — we help connect the community to restore what’s missing.
           </p>
           <p className="text-sm md:text-base text-gray-600">
             With secure listings, real-time updates, and recovery tracking, our platform empowers users to act fast, stay informed, and help others.

@@ -12,7 +12,7 @@ const Footer = () => {
           <div className="lg:col-span-2 col-span-1">
             <div className="flex items-center mb-4">
               <img src={logo} alt="Logo" className="w-6 h-6" />
-              <span className="ml-2 text-xl font-bold">WhereIsIt</span>
+              <span className="ml-2 text-xl font-bold">WhereIsItHub</span>
             </div>
             <p className="text-gray-300 mb-4">
               Connecting people with their lost belongings. Our platform makes it easy to report lost items and help others find what they've lost.
@@ -58,7 +58,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-sm">
-          <p className="text-gray-300">© {new Date().getFullYear()} WhereIsIt. All rights reserved.</p>
+          <p className="text-gray-300">© {new Date().getFullYear()} WhereIsItHub. All rights reserved.</p>
         </div>
       </div>
     </footer>

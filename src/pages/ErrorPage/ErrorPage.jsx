@@ -10,7 +10,7 @@ const ErrorPage = () => {
     return (
         <div>
             <Helmet>
-                <title>Page Not Found | WhereIsIt</title>
+                <title>Page Not Found | WhereIsItHub</title>
             </Helmet>
             <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
                 <div className="text-center">
