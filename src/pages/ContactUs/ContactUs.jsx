@@ -49,7 +49,7 @@ const ContactUs = () => {
         </motion.span>
       </motion.h2>
 
-      <p className="text-center max-w-2xl mx-auto text-gray-600 mt-4 mb-12 text-sm md:text-base">
+      <p className="text-center max-w-2xl mx-auto text-gray-700 mt-4 mb-12 text-sm md:text-base">
         We'd love to hear from you. Whether you have a question about features,
         feedback, or anything else — our team is ready to answer.
       </p>
@@ -62,7 +62,7 @@ const ContactUs = () => {
               <h3 className="lg:text-3xl text-xl pb-2 font-semibold text-primary mb-2">
                 Contact Information
               </h3>
-              <p className="text-sm text-secondary mb-4">
+              <p className="text-sm text-black mb-4">
                 Reach us directly via email, phone, or follow us on social media.
               </p>
               <ul className="space-y-3 text-black text-sm">
@@ -82,26 +82,26 @@ const ContactUs = () => {
             </div>
 
             <div>
-              <h4 className="text-xl font-semibold text-primary mb-2">Follow Us</h4>
-              <div className="flex gap-4">
+              <h4 className="text-xl font-semibold text-blackmb-2">Follow Us</h4>
+              <div className="flex pt-2 gap-4">
                 <a
                   href="https://www.facebook.com/maanvia.khan/"
                   target="_blank"
-                  className="text-secondary hover:text-primary"
+                  className="text-primary hover:text-black"
                 >
                   <Facebook size={20} />
                 </a>
                 <a
                   href="#"
                   target="_blank"
-                  className="text-secondary hover:text-primary"
+                  className="text-primary hover:text-black"
                 >
                   <Twitter size={20} />
                 </a>
                 <a
                   href="https://www.linkedin.com/in/rahima-khatun28/"
                   target="_blank"
-                  className="text-secondary hover:text-primary"
+                  className="text-primary hover:text-black"
                 >
                   <Linkedin size={20} />
                 </a>
@@ -110,7 +110,7 @@ const ContactUs = () => {
           </div>
 
           {/* Contact Form */}
-          <div className=" bg-[#ffffff90] w-full ">
+          <div className=" bg-white w-full ">
             <form className="space-y-6 p-6" onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-black">

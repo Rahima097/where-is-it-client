@@ -1,19 +1,48 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import "tailwindcss";
-@plugin "daisyui" {
-  themes: light --default;
-}
-
-@plugin "daisyui/theme" {
-  name: "light";
-  default: true;
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@plugin "daisyui";
+[data-theme="light"]  {
   --color-primary: #fe6035;
   --color-secondary: #091057;
-  --color-base-200: #fff4f1;
+  --color-black: #101828;
   --color-accent: #0a1a3d;
+  --color-base-200: #fff4f1;
+  --color-gray-700: #505867;
 }
 
-*{
-    font-family: "Inter", sans-serif;
+* {
+  font-family: "Inter", sans-serif;
 }
 
+/* Dark theme variables */
+[data-theme="dark"] {
+  --color-primary: #fe6035;
+  --color-secondary: #04091a;
+  --color-accent: #0a1a3d;
+  --color-black: #f3f3f3;
+  --color-neutral: #4d545e;
+  --color-base-100: #484c52;
+  --color-base-200: #191e24;
+  --color-base-300: #15191e;
+  --color-gray-700: #a3a3a3;
+  --color-base-content: #a6adba;
+}
+
+[data-theme="dark"] body {
+  background-color: #1d232a;
+  color: #a6adba;
+}
+
+[data-theme="dark"] .bg-white {
+  background-color: #1d232a !important;
+  color: #a6adba !important;
+}
+
+[data-theme="dark"] .text-black {
+  color: #a6adba !important;
+}
+
+/* Smooth transitions */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}

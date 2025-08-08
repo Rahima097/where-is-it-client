@@ -2,27 +2,21 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, NavLink } from 'react-router';
 import { useAuth } from '../../contexts/AuthContext/AuthProvider';
 import logo from '../../assets/Img/whereisit_logo.png';
-import {
-  Home,
-  Search,
-  PlusSquare,
-  ShieldCheck,
-  List,
-  LogIn,
-  LogOut,
-  Info,
-  BookText,
-  Mail,
-  Menu,
-  X
-} from 'lucide-react';
+import { Home, Search, PlusSquare, ShieldCheck, List, LogIn, LogOut, Info, BookText, Mail, Menu, X, Sun, Moon } from 'lucide-react';
 
 const NavBar = () => {
   const { user, logOut } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [theme, setTheme] = useState('light');
   const dropdownRef = useRef();
   const mobileMenuRef = useRef();
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setTheme(savedTheme);
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -33,6 +27,7 @@ const NavBar = () => {
         setMobileMenuOpen(false);
       }
     };
+
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
@@ -45,16 +40,20 @@ const NavBar = () => {
     }
   };
 
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+    document.documentElement.setAttribute('data-theme', newTheme);
+  };
+
   const mobileLinks = (
     <>
-      {/* Close Icon */}
       <div className="flex justify-end mb-2">
         <button onClick={() => setMobileMenuOpen(false)} className="text-primary">
           <X size={20} />
         </button>
       </div>
-
-      {/* Public Links */}
       <li>
         <NavLink to="/" onClick={() => setMobileMenuOpen(false)}>
           <div className="flex items-center gap-2">
@@ -90,8 +89,6 @@ const NavBar = () => {
           </div>
         </NavLink>
       </li>
-
-      {/* Private Links (only if logged in) */}
       {user && (
         <>
           <li>
@@ -122,11 +119,9 @@ const NavBar = () => {
 
   return (
     <>
-      {/* Sticky Top Navbar */}
       <div className="bg-secondary sticky top-0 z-50">
         <div className="navbar max-w-7xl shadow-md p-4 mx-auto">
           <div className="navbar-start flex items-center gap-2">
-            {/* Mobile Hamburger */}
             <div className="lg:hidden relative" ref={mobileMenuRef}>
               <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="text-white border border-white p-1 rounded-xl">
                 {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -137,15 +132,12 @@ const NavBar = () => {
                 </ul>
               )}
             </div>
-
-            {/* Logo */}
             <Link to="/" className="flex items-center gap-2 text-2xl font-bold text-white">
-              <img src={logo} alt="Logo" className="w-8 h-8" />
+              <img src={logo || "/placeholder.svg"} alt="Logo" className="w-8 h-8" />
               <span className="hidden sm:inline">WhereIsItHub</span>
             </Link>
           </div>
-
-          {/* Desktop Center Public Links */}
+          
           <div className="navbar-center hidden md:hidden lg:flex">
             <ul className="menu text-white menu-horizontal px-1 gap-2 lg:gap-4">
               <li>
@@ -190,9 +182,20 @@ const NavBar = () => {
               </li>
             </ul>
           </div>
-
-          {/* User section */}
+          
           <div className="navbar-end flex items-center gap-4">
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="btn btn-sm btn-ghost text-white hover:bg-primary hover:bg-opacity-20 flex items-center gap-2"
+              aria-label="Toggle theme"
+            >
+              {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+              <span className="hidden sm:inline">
+                {theme === 'light' ? 'Dark' : 'Light'}
+              </span>
+            </button>
+
             {!user ? (
               <Link to="/login" className="btn btn-sm btn-primary flex items-center gap-2">
                 <LogIn size={16} />
@@ -234,7 +237,6 @@ const NavBar = () => {
                     </ul>
                   )}
                 </div>
-
                 <button onClick={handleLogout} className="btn btn-sm btn-primary text-white flex items-center gap-2">
                   <LogOut size={16} />
                   <span className="hidden sm:inline">Logout</span>

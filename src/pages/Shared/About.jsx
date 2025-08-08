@@ -71,7 +71,7 @@ const About = () => {
           <p className="text-base md:text-lg text-gray-700">
             WhereIsItHub is your trusted platform for reuniting people with their lost or found belongings. Whether it's keys, documents, pets, or phones — we help connect the community to restore what’s missing.
           </p>
-          <p className="text-sm md:text-base text-gray-600">
+          <p className="text-sm md:text-base text-gray-700">
             With secure listings, real-time updates, and recovery tracking, our platform empowers users to act fast, stay informed, and help others.
           </p>
            <Link to="/allItems" className="btn btn-primary">Explore Items</Link>

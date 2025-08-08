@@ -80,7 +80,7 @@ const MyItems = () => {
         {myItems.length === 0 ? (
           <>
             <div className="flex flex-col justify-center items-center py-10">
-              <p className="text-center text-xl font-bold text-gray-600">No items found. Didn't added any item yet?</p>
+              <p className="text-center text-xl font-bold text-gray-700">No items found. Didn't added any item yet?</p>
               <Link to="/addItems" className="btn btn-primary mt-10 ">Add Items</Link>
             </div>
           </>

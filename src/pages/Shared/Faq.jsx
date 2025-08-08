@@ -22,7 +22,7 @@ const Faq = () => {
         </motion.span>
       </motion.h2>
 
-      <p className="text-center max-w-2xl mx-auto text-gray-600 text-sm md:text-base">
+      <p className="text-center max-w-2xl mx-auto text-gray-700 text-sm md:text-base">
         Common questions and answers about using WhereIsItHub — your trusted lost and found platform.
       </p>
 

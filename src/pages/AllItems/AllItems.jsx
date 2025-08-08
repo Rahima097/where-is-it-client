@@ -110,7 +110,7 @@ const AllItems = () => {
         </motion.span>
       </motion.h2>
 
-      <p className="text-center max-w-2xl mx-auto text-gray-600 text-sm md:text-base mb-12">
+      <p className="text-center max-w-2xl mx-auto text-gray-700 text-sm md:text-base mb-12">
         Browse all available lost and found campaigns — use the search and sorting options to find what you’re looking for.
       </p>
 
@@ -184,17 +184,17 @@ const AllItems = () => {
             </div>
 
             <div className="p-5 flex flex-col flex-grow space-y-3">
-              <h3 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
+              <h3 className="text-xl font-semibold text-black flex items-center gap-2">
                 <BadgeInfo className="w-5 h-5 text-primary" />
                 {item.title}
               </h3>
 
-              <p className="text-gray-600 flex items-center gap-2 text-sm">
+              <p className="text-gray-700 flex items-center gap-2 text-sm">
                 <MapPin className="w-4 h-4 text-primary" />
                 <span><strong>Location:</strong> {item.location || 'Unknown'}</span>
               </p>
 
-              <p className="text-gray-600 flex items-center gap-2 text-sm">
+              <p className="text-gray-700 flex items-center gap-2 text-sm">
                 <CalendarDays className="w-4 h-4 text-primary" />
                 <span><strong>Date:</strong> {new Date(item.date).toLocaleDateString() || 'N/A'}</span>
               </p>
