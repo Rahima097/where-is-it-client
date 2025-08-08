@@ -15,6 +15,9 @@ const AllItems = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(false);
   const [sortOption, setSortOption] = useState('date-desc');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
+
   const navigate = useNavigate();
 
   const fetchItems = async (search = '') => {
@@ -23,6 +26,7 @@ const AllItems = () => {
       const res = await axios.get(`${import.meta.env.VITE_API_URL}/items?search=${search}`);
       let fetchedItems = res.data || [];
       setItems(sortItems(fetchedItems, sortOption));
+      setCurrentPage(1); 
     } catch (error) {
       console.error(error);
       setItems([]);
@@ -39,7 +43,6 @@ const AllItems = () => {
     const value = e.target.value;
     setSearchTerm(value);
 
-    // Auto fetch all items when input is cleared
     if (value.trim() === '') {
       fetchItems('');
     }
@@ -60,6 +63,7 @@ const AllItems = () => {
     setSortOption(selectedOption);
     const sortedItems = sortItems(items, selectedOption);
     setItems(sortedItems);
+    setCurrentPage(1); 
   };
 
   const sortItems = (data, option) => {
@@ -77,6 +81,11 @@ const AllItems = () => {
         return sorted;
     }
   };
+
+  // Pagination logic
+  const totalPages = Math.ceil(items.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedItems = items.slice(startIndex, startIndex + itemsPerPage);
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-16">
@@ -135,7 +144,7 @@ const AllItems = () => {
         <select
           value={sortOption}
           onChange={handleSortChange}
-          className="select w-full  select-bordered lg:w-48 md:w-48"
+          className="select w-full select-bordered lg:w-48 md:w-48"
         >
           <option value="date-desc">Newest First</option>
           <option value="date-asc">Oldest First</option>
@@ -161,7 +170,7 @@ const AllItems = () => {
 
       {/* Items Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {items.map(item => (
+        {paginatedItems.map(item => (
           <div key={item._id} className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col">
             <div className="relative overflow-hidden rounded-t-2xl h-48">
               <img
@@ -203,6 +212,37 @@ const AllItems = () => {
           </div>
         ))}
       </div>
+
+      {/* Pagination Controls */}
+      {totalPages > 1 && (
+        <div className="flex justify-center mt-12 space-x-2">
+          <button
+            className="btn btn-outline"
+            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+
+          {[...Array(totalPages)].map((_, idx) => (
+            <button
+              key={idx}
+              className={`btn ${currentPage === idx + 1 ? 'btn-primary' : 'btn-outline'}`}
+              onClick={() => setCurrentPage(idx + 1)}
+            >
+              {idx + 1}
+            </button>
+          ))}
+
+          <button
+            className="btn btn-outline"
+            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
+        </div>
+      )}
     </div>
   );
 };

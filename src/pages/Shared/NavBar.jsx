@@ -124,7 +124,7 @@ const NavBar = () => {
     <>
       {/* Sticky Top Navbar */}
       <div className="bg-secondary sticky top-0 z-50">
-        <div className="navbar w-11/12 shadow-md p-4 mx-auto">
+        <div className="navbar max-w-7xl shadow-md p-4 mx-auto">
           <div className="navbar-start flex items-center gap-2">
             {/* Mobile Hamburger */}
             <div className="lg:hidden relative" ref={mobileMenuRef}>

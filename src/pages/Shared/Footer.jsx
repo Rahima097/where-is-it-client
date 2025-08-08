@@ -7,7 +7,7 @@ import logo from '../../assets/Img/whereisit_logo.png';
 const Footer = () => {
   return (
     <footer className="bg-secondary text-white">
-      <div className="w-11/12 mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10">
           <div className="lg:col-span-2 col-span-1">
             <div className="flex items-center mb-4">

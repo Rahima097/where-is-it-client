@@ -54,12 +54,12 @@ const ContactUs = () => {
         feedback, or anything else — our team is ready to answer.
       </p>
 
-      <div className="max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-10 items-start bg-white p-8 rounded-md shadow-md">
+      <div className="max-w-7xl  mx-auto">
+        <div className="w-full grid md:grid-cols-2 gap-10 items-start p-8 rounded-md ">
           {/* Contact Info */}
           <div className="space-y-6">
             <div>
-              <h3 className="text-xl font-semibold text-primary mb-2">
+              <h3 className="lg:text-3xl text-xl pb-2 font-semibold text-primary mb-2">
                 Contact Information
               </h3>
               <p className="text-sm text-secondary mb-4">
@@ -82,7 +82,7 @@ const ContactUs = () => {
             </div>
 
             <div>
-              <h4 className="text-md font-semibold text-primary mb-2">Follow Us</h4>
+              <h4 className="text-xl font-semibold text-primary mb-2">Follow Us</h4>
               <div className="flex gap-4">
                 <a
                   href="https://www.facebook.com/maanvia.khan/"
@@ -110,64 +110,66 @@ const ContactUs = () => {
           </div>
 
           {/* Contact Form */}
-          <form className="space-y-6" onSubmit={handleSubmit}>
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium text-black">
-                Full Name
-              </label>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                required
-                placeholder="John Doe"
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-primary focus:border-primary"
-              />
-            </div>
+          <div className=" bg-[#ffffff90] w-full ">
+            <form className="space-y-6 p-6" onSubmit={handleSubmit}>
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-black">
+                  Full Name
+                </label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  required
+                  placeholder="John Doe"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-primary focus:border-primary"
+                />
+              </div>
 
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-black">
-                Email Address
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                required
-                placeholder="you@example.com"
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-primary focus:border-primary"
-              />
-            </div>
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-black">
+                  Email Address
+                </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  required
+                  placeholder="you@example.com"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-primary focus:border-primary"
+                />
+              </div>
 
-            <div>
-              <label htmlFor="message" className="block text-sm font-medium text-black">
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                rows={5}
-                value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                required
-                placeholder="Write your message here..."
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-primary focus:border-primary"
-              ></textarea>
-            </div>
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium text-black">
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={5}
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  required
+                  placeholder="Write your message here..."
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-primary focus:border-primary"
+                ></textarea>
+              </div>
 
-            <div>
-              <button
-                type="submit"
-                className="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-opacity-90 transition-colors duration-200"
-              >
-                Send Message
-              </button>
-            </div>
-          </form>
+              <div>
+                <button
+                  type="submit"
+                  className="l bg-primary text-white py-2 px-4 rounded-md hover:bg-opacity-90 transition-colors duration-200"
+                >
+                  Send Message
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </section>
