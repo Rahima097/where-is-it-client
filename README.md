@@ -4,7 +4,7 @@
 To create a community-driven platform that helps people reunite with their lost belongings by providing an easy-to-use interface for reporting, searching, and recovering lost or found items.
 
 ## Live URL
-🌐 **Frontend**: https://whereisithub-lost-and-found-item.netlify.app/ 
+🌐 **Frontend**: https://whereisit-hub.netlify.app/ 
 🔗 **Backend**: https://where-is-it-server-nine.vercel.app/
 
 ## Key Features
